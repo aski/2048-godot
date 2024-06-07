@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://6qcs17xf73mw"]
+
+[ext_resource type="Script" path="res://score.gd" id="1_2xr6m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_odkfk"]
+size = Vector2(624, 48)
+
+[node name="Score" type="Area2D"]
+script = ExtResource("1_2xr6m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(320, 32)
+shape = SubResource("RectangleShape2D_odkfk")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 632.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 31
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
