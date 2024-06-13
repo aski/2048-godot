@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="2048-new"
-run/main_scene="res://game.tscn"
+config/name="2048-godot"
+run/main_scene="res://src/game.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
