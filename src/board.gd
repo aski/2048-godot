@@ -3,8 +3,8 @@ extends Node2D
 
 enum Direction { UP, DOWN, LEFT, RIGHT }
 
-const PLACEHOLDER_SCENE = preload("res://placeholder.tscn")
-const TILE_SCENE = preload("res://tile.tscn")
+const PLACEHOLDER_SCENE = preload("res://src/placeholder.tscn")
+const TILE_SCENE = preload("res://src/tile.tscn")
 
 const NEW_TILE_ANIMATION_TIME: float = 0.25
 const MOVE_ANIMATION_TIME: float = 0.25
