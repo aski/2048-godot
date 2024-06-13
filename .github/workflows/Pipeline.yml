@@ -1,0 +1,40 @@
+name: "godot-ci export"
+on: push
+
+env:
+  GODOT_VERSION: 4.2.1
+  EXPORT_NAME: 2048
+  PROJECT_PATH: 2048
+
+  jobs:
+    export-web:
+      name: Web Export
+      runs-on: ubuntu-20.04
+      container:
+        image: barichello/godot-ci:4.2.1
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            lfs: true
+        - name: Setup
+          run: |
+            mkdir -v -p ~/.local/share/godot/export_templates/
+            mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+        - name: Web Build
+          run: |
+            mkdir -v -p build/web
+            godot --headless --verbose --export-release "HTML5" build/index.html
+        - name: Upload Artifact
+          uses: actions/upload-artifact@v1
+          with:
+            name: web
+            path: build
+        - name: Install rsync
+          run: |
+            apt-get update && apt-get install -y rsync
+        - name: Deploy to GitHub Pages
+          uses: JamesIves/github-pages-deploy-action@releases/v4
+          with:
+            branch: gh-pages
+            folder: build
