@@ -1,5 +1,8 @@
 name: "godot-ci export"
-on: push
+on: [push]
+
+permissions:
+  contents: write
 
 env:
   GODOT_VERSION: 4.2.1
@@ -14,7 +17,7 @@ jobs:
       image: barichello/godot-ci:4.2.1
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           lfs: true
       - name: Setup
@@ -26,7 +29,7 @@ jobs:
           mkdir -v -p build/web
           godot --headless --verbose --export-release "Web" build/web/index.html
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: web
           path: build/web
