@@ -24,12 +24,12 @@ jobs:
       - name: Web Build
         run: |
           mkdir -v -p build/web
-          godot --headless --verbose --export-release "HTML5" build/index.html
+          godot --headless --verbose --export-release "Web" build/web/index.html
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
           name: web
-          path: build
+          path: build/web
       - name: Install rsync
         run: |
           apt-get update && apt-get install -y rsync
