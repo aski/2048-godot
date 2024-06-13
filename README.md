@@ -5,4 +5,4 @@ The game 2048 implemented in Godot 4 based on [Gabriele Cirulli's original imple
 ## Controls
 
 Move tiles: Arrow keys, WASD or gamepad d-pad
-Open menu: Escape key or gamepad start button
+Open menu: Escape key or Gamepad start button
