@@ -56,6 +56,5 @@ jobs:
           git add .
           git config --local user.email "godot@GitHubActions"
           git config --local user.name "GitHub Actions"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
           git commit -a -m "update ${{ github.sha }}"
           git push -u origin +HEAD:gh-pages
