@@ -28,6 +28,9 @@ jobs:
         run: |
           mkdir -v -p build/web
           godot --headless --verbose --export-release "Web" build/web/index.html
+      - name: Install curl
+        run: |
+          apt-get update && apt-get install -y curl
       # Workaround for SharedArrayBuffer support on GitHub Pages
       # See: https://github.com/godotengine/godot-docs/issues/7084
       - name: SharedArrayBuffer Workaround
