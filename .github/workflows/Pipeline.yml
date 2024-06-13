@@ -5,16 +5,14 @@ env:
   GODOT_VERSION: 4.2.2
 
 jobs:
-  export-web:
+  build-web:
     name: Web Export
     runs-on: ubuntu-20.04
     container:
       image: barichello/godot-ci:4.2.2
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          lfs: true
+        uses: actions/checkout@v4
 
       - name: Setup
         run: |
@@ -41,18 +39,26 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: web
+          name: page
           path: build/web
+          if-no-files-found: error
 
-      - name: Deploy to GitHub Pages
-        if: (github.event_name != 'pull_request')
-        run: |
-          cd build/web
-          touch .nojekyll
-          git init
-          cp ../../.git/config ./.git/config
-          git add .
-          git config --local user.email "godot@GitHubActions"
-          git config --local user.name "GitHub Actions"
-          git commit -a -m "update ${{ github.sha }}"
-          git push -u origin +HEAD:gh-pages
+  deploy-web:
+    runs-on: ubuntu-20.04
+    name: Publish Pages
+    needs: build-web
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
+
+    steps:
+      - uses: actions/download-artifact@master
+        with:
+          name: page
+          path: .
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4
