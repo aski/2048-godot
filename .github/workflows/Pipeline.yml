@@ -1,6 +1,9 @@
 name: "godot-ci export"
 on: [push]
 
+env:
+  GODOT_VERSION: 4.2.2
+
 jobs:
   export-web:
     name: Web Export
